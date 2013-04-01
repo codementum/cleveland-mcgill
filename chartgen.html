@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>D3 Cleveland-McGill Chart Generator</title>
+
+<!-- This doesn't seem to work!
+<script type="text/javascript" src="https://github.com/mbostock/d3/raw/v2.8.1/d3.js"></script>
+<script type="text/javascript" src="https://github.com/mbostock/d3/raw/v2.8.1/d3.layout.js"></script>
+-->
+
+<!-- load d3.js from Dropbox (Mac)
+ -->
+<script type="text/javascript" src="/Users/lane/Dropbox/personal/d3/d3/d3.js"></script>
+<script type="text/javascript" src="/Users/lane/Dropbox/personal/d3/d3/d3.layout.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+
+<!-- load d3.js from Dropbox (Linux)
+<script type="text/javascript" src="/home/lane/Dropbox/personal/d3/d3/d3.js"></script>
+<script type="text/javascript" src="/home/lane/Dropbox/personal/d3/d3/d3.layout.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+ -->
+
+
+
+<!--
+<script type="text/javascript" src="../../../../personal/d3/d3/d3.js"></script>
+<script type="text/javascript" src="../../../../personal/d3/d3/d3.layout.js"></script>
+-->
+
+<!-- styles to make things prettier -->
+<style type="text/css">
+
+svg {
+   /*border: solid 1px #aaa;*/
+   font: 14px sans-serif;
+   stroke: black;
+   fill: white;
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<p id="test">
+This (hopefully) helpful little tool will create the bar and pie charts in the style used in Cleveland-McGill's position-angle study on graphical perception of various charts and graphs.
+</p>
+<p>
+To do:
+<ul>
+    <li>More chart types</li>
+    <li>Sliders to control quantities</li>
+</ul>
+</p>
+
+<!-- chartgen.js does all the work -->
+<script type="text/javascript" src="chartgen.js"></script>
+   
+<p>
+Data: <input type="text" id="dataset" name="dataset" size="50" /> 
+<br />
+Smaller/Larger: <input type="text" id="ratios" name="ratios" size="50" /> 
+<br />
+Prefix: <input type="text" id="prefix" name="prefix" size="50" /> 
+</p>
+
+</body>
+</html>
