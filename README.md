@@ -1,4 +1,4 @@
-cleveland-mcgill
+Cleveland-McGill Chart Generator
 ================
 
-Creates charts for experiments that replicate the seminal Cleveland McGill work on graphical perception.
+Creates charts in the style of Cleveland and McGill's seminal study on graphical perception.
