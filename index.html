@@ -31,18 +31,37 @@ svg {
 </h1>
 
 <p>
-  This tool creates the charts in the style used in Cleveland-McGill's position-angle study on graphical perception of various charts and graphs.
+This tool uses <a href="http://d3js.org">d3.js</a> to create several charts in the style of Cleveland and McGill's seminal <a href="http://www.cs.ubc.ca/~tmm/courses/cpsc533c-04-spr/readings/cleveland.pdf">study on graphical perception (pdf)</a>.
 </p>
 
-<div>
-  Data: <span id="data"></span> 
-</div>
-<div>
-  Smaller/Larger: <span id="ratios"></span> 
-</div>
-<div>
-  Prefix: <span id="prefix"></span> 
-</div>
+<p>
+On page load, a semi-random 5-digit dataset is generated. Datasets are generated using the same algorithm that Cleveland and McGill used in their study. 
+</p>
+
+<p>
+Currently, the best way to extract the charts is to use <a href="http://nytimes.github.com/svg-crowbar/">SVG Crowbar</a> from <a href="http://twitter.com/shancarter">Shan Carter</a>.
+</p>
+
+<p>
+Some charts, such as Treemaps and Bubble charts, weren't included in the original study. These charts were included in a later study from <a href="http://twitter.com/jeffrey_heer">Jeffrey Heer</a> and <a href="http://twitter.com/mbostock">Mike Bostock</a>, <a href="http://vis.stanford.edu/papers/crowdsourcing-graphical-perception">Crowdsourcing Graphical Perception</a>, part of which replicated Cleveland and McGill's original experiment.
+</p>
+
+<p>
+I needed these charts so I could run my own version of this experiment, which explored how <a href="http://webpages.uncc.edu/~ltharri1/files/chi_13.pdf"> emotion can influence how well we perceive visualizations (pdf)</a>, which I'll be presenting at <a href="http://chi2013.acm.org">CHI 2013</a>.
+</p>
+
+<p>
+Here's <a href="http://github.com/codementum/cleveland-mcgill">the code</a>. (It's messy, since it's the first thing I built using d3.)
+</p>
+
+<h2> Generated Dataset Info </h2>
+<p>
+  Dataset: <span id="data"></span>
+</p>
+
+<p>
+  Answers: <span id="ratios"></span> 
+</p>
 
 <script>
 
@@ -104,31 +123,31 @@ nonAdjData[swapTo] = tmp;
 
 
 // add titles and svgs to doc
-document.write('<h1> Bar Chart (adjacent comparison) </h1>');
+document.write('<h2> Bar Chart (adjacent comparison) </h2>');
 makeBar();
 document.write('<br />');
 
-document.write('<h1> Bar Chart (non-adjacent comparison) </h1>');
+document.write('<h2> Bar Chart (non-adjacent comparison) </h2>');
 makeNonAdjacentBar();
 document.write('<br />');
 
-document.write('<h1> Sideways Bar (adjacent comparison) </h1>');
+document.write('<h2> Sideways Bar (adjacent comparison) </h2>');
 makeSidewaysBar();
 document.write('<br />');
 
-document.write('<h1> Stacked Bar (bottom comparison) </h1>');
+document.write('<h2> Stacked Bar (bottom comparison) </h2>');
 makeStackedBar();
 document.write('<br />');
 
-document.write('<h1> Pie Chart (ordered/non-rotated) </h1>');
+document.write('<h2> Pie Chart (ordered/non-rotated) </h2>');
 makePie();
 document.write('<br />');
 
-document.write('<h1> Pie Chart (unordered/rotated) </h1>');
+document.write('<h2> Pie Chart (unordered/rotated) </h2>');
 makeRandomPie();
 document.write('<br />');
 
-document.write('<h1> Bubble Chart </h1>');
+document.write('<h2> Bubble Chart </h2>');
 makeBubble();
 document.write('<br />');
 
@@ -512,9 +531,9 @@ function computeAnswerString(data) {
   var max = d3.max(data);
   if(onlyAB) {
     if(data[Apos] < data[Bpos]) {
-      A+= data[Apos]+"_"+data[Bpos];
+      A+= "A is smaller: " + data[Apos]+"; B is larger: "+data[Bpos];
     } else {
-      A+= data[Bpos]+"_"+data[Apos];
+      A+= "B is smaller: " + data[Bpos]+"; A is larger: "+data[Apos];
     }
  
   } else {
@@ -722,6 +741,7 @@ chart.append("text")
     //.attr("y", h - pad - 10)
     .attr("y", function() { return (h - y(leftBar[0])/2 - pad + 5); })
     .attr("font-size", 10);
+
 // right label
 chart.append("text")
     .text(rightText)
@@ -764,8 +784,7 @@ chart.append("line")
 
 
 // set dataset info
-d3.select('#data').text(data);
+d3.select('#data').text(data.join(', '));
 d3.select('#ratios').text(computeAnswerString(data));
-d3.select('#prefix').text(data.join('_')+'__'+computeAnswerString(data));
 
 </script>
